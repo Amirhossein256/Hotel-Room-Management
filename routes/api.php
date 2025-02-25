@@ -10,3 +10,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('guests', \App\Http\Controllers\API\GuestController::class);
 
 Route::apiResource('rooms', \App\Http\Controllers\API\RoomController::class);
+
+Route::get('/reservations', [\App\Http\Controllers\API\ReservationController::class, 'index']);
+Route::post('/reservations', [\App\Http\Controllers\API\ReservationController::class, 'store']);

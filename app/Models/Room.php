@@ -66,5 +66,14 @@ class Room extends Model
         }
 
         return $room_number;
+    }
 
-    }}
+    public function guests()
+    {
+
+        return $this->belongsToMany(Guest::class, 'room_guest_reservation')
+            ->withPivot('check_in_date', 'check_out_date')
+            ->withTimestamps();
+    }
+
+}

@@ -192,6 +192,110 @@
                 }
             }
         },
+        "/api/reservations": {
+            "get": {
+                "tags": [
+                    "Reservations"
+                ],
+                "summary": "Get a list of all reservations",
+                "operationId": "26909e6f6eb4a49ab5428889a7ff1067",
+                "responses": {
+                    "200": {
+                        "description": "List of reservations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Reservation"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reservations"
+                ],
+                "summary": "Create a new reservation",
+                "operationId": "b1466042c18abd23d64464649f2442c3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "guest_id",
+                                    "room_id",
+                                    "check_in_date",
+                                    "check_out_date"
+                                ],
+                                "properties": {
+                                    "guest_id": {
+                                        "description": "ID of the guest",
+                                        "type": "integer"
+                                    },
+                                    "room_id": {
+                                        "description": "ID of the room",
+                                        "type": "integer"
+                                    },
+                                    "check_in_date": {
+                                        "description": "Check-in date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "check_out_date": {
+                                        "description": "Check-out date",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reservation created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Reservation created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "412": {
+                        "description": "Precondition failed, room unavailable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This Room Unavailable"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/rooms": {
             "get": {
                 "tags": [
@@ -407,6 +511,45 @@
                 },
                 "type": "object"
             },
+            "Reservation": {
+                "required": [
+                    "guest_name",
+                    "room_number",
+                    "status",
+                    "check_in_date",
+                    "check_out_date"
+                ],
+                "properties": {
+                    "guest_name": {
+                        "description": "Full name of the guest",
+                        "type": "string"
+                    },
+                    "room_number": {
+                        "description": "Room number",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Room status",
+                        "type": "string",
+                        "enum": [
+                            "ready",
+                            "pending_cleanup",
+                            "reserved"
+                        ]
+                    },
+                    "check_in_date": {
+                        "description": "Check-in date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "check_out_date": {
+                        "description": "Check-out date",
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "type": "object"
+            },
             "Room": {
                 "required": [
                     "status"
@@ -452,6 +595,10 @@
         {
             "name": "Guests",
             "description": "Operations related to guests"
+        },
+        {
+            "name": "Reservations",
+            "description": "Operations related to reservations"
         },
         {
             "name": "Rooms",

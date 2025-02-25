@@ -26,4 +26,11 @@ class Guest extends Model
         'last_name',
         'first_name'
     ];
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, 'room_guest_reservation')
+            ->withPivot('check_in_date', 'check_out_date')
+            ->withTimestamps();
+    }
 }

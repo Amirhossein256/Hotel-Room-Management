@@ -48,7 +48,9 @@ class GuestController extends Controller
     {
         $per_page = $request->get('per_page', 15);
 
-        $guests = Guest::paginate($per_page);
+        $guests = Guest::query()
+            ->latest()
+            ->paginate($per_page);
 
         return GuestResource::collection($guests);
     }

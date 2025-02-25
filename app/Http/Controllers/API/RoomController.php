@@ -49,7 +49,9 @@ class RoomController extends Controller
     {
         $per_page = $request->get('per_page', 15);
 
-        $rooms = Room::paginate($per_page);
+        $rooms = Room::query()
+            ->latest()
+            ->paginate($per_page);
 
         return RoomResource::collection($rooms);
     }

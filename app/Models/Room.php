@@ -17,6 +17,11 @@ use Illuminate\Database\Eloquent\Model;
  *     ),
  *     @OA\Property(
  *         property="room_number",
+ *         type="integer",
+ *         description="Room number"
+ *     ),
+ *     @OA\Property(
+ *         property="room_name",
  *         type="string",
  *         description="Room number"
  *     ),
@@ -50,4 +55,16 @@ class Room extends Model
         'status',
         'room_name'
     ];
-}
+
+    public static function generateRoomNumber(): string
+    {
+
+        $room_number = rand(100000, 999999);
+        if (self::where('room_number', $room_number)->exists()) {
+
+            self::generateRoomNumber();
+        }
+
+        return $room_number;
+
+    }}

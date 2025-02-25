@@ -418,6 +418,10 @@
                     },
                     "room_number": {
                         "description": "Room number",
+                        "type": "integer"
+                    },
+                    "room_name": {
+                        "description": "Room number",
                         "type": "string"
                     },
                     "status": {

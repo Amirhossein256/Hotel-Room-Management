@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\GuestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,4 +7,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //})->middleware('auth:sanctum');
 
-Route::apiResource('guests', GuestController::class);
+Route::apiResource('guests', \App\Http\Controllers\API\GuestController::class);
+
+Route::apiResource('rooms', \App\Http\Controllers\API\RoomController::class);

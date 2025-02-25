@@ -18,7 +18,8 @@ class RoomFactory extends Factory
     {
         return [
             'room_number' => $this->faker->unique()->numerify('######'),
-            'status' => $this->faker->randomElement(['ready', 'pending_cleanup', 'reserved']),
+            'status'      => $this->faker->randomElement(['ready', 'pending_cleanup', 'reserved']),
+            'room_name'   => $this->faker->name
         ];
     }
 }
